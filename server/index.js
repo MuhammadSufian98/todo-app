@@ -1,11 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const TasksRouter = require("./routers/TasksRouters.js");
-const LoginRouter = require("./routers/LoginRouters.js");
+const TasksRouter = require("./routers/tasks.js");
+const LoginRouter = require("./routers/login.js");
 const app = express();
-const PORT = 3000;
-
+const port = process.env.SERVER_PORT || 3000;
 mongoose
   .connect("mongodb://localhost:27017/ToDoDB")
   .then(() => console.log("Connected to MongoDB"))
@@ -17,6 +17,6 @@ app.use(cors());
 app.use("/", TasksRouter);
 app.use("/", LoginRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });

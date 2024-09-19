@@ -1,7 +1,7 @@
 import "./App.css";
-import NavBarAndMP from "./components/combineMP/navBarandMP.js";
-import Login from "./components/log-In/login";
-import PrivateRoute from "./privateRouter.js";
+import NavBarAndMP from "./components/combineMP/navBarandMP.jsx";
+import Login from "./components/log-In/login.jsx";
+import PrivateRoute from "./privateRouter.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

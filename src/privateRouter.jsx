@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NavBarAndMP from "./components/combineMP/navBarandMP.js";
+import NavBarAndMP from "./components/combineMP/navBarandMP.jsx";
 import { useNavigate } from "react-router-dom";
 
 const PrivateRoute = () => {

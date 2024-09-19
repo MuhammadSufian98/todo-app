@@ -3,7 +3,7 @@ import "./mp.css";
 import Delete from "./delete.png";
 import Edit from "./pen.png";
 import axios from "axios";
-import { TaskContext } from "../../context.js";
+import { TaskContext } from "../../context.jsx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 

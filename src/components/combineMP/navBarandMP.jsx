@@ -1,6 +1,6 @@
 import React from "react";
-import MainPage from "../mainPage/mainPage.js";
-import NavBar from "../navBar/navBar.js";
+import MainPage from "../mainPage/mainPage.jsx";
+import NavBar from "../navBar/navBar.jsx";
 
 function NavBarAndMP() {
   return (

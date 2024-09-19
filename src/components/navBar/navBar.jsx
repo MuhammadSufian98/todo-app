@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import "./navBarStyles.css";
-import { TaskContext } from "../../context.js";
+import { TaskContext } from "../../context.jsx";
 import { toast } from "react-toastify";
 
 function NavBar() {

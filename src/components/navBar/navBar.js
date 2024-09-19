@@ -8,7 +8,6 @@ function NavBar() {
   const { SearchRN, setFilteredTasks, Tasks, Task, setTask, GetTask } =
     useContext(TaskContext);
   const [fieldRN, setFieldRN] = useState("");
-  const [currentRollNo, setCurrentRollNo] = useState("");
   const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
@@ -23,10 +22,7 @@ function NavBar() {
       setFilteredTasks(Tasks);
     }
 
-    const savedRollNo = localStorage.getItem("ID");
-    if (savedRollNo) {
-      setCurrentRollNo(savedRollNo);
-    }
+ 
   }, [SearchRN, Tasks, setFilteredTasks]);
 
   async function handleTaskSave() {

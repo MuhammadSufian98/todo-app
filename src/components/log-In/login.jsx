@@ -28,7 +28,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(" https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/login", {
+      const response = await axios.post("https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/login", {
         Email: LogInEmail,
         Password: LogInPassword,
       });
@@ -41,7 +41,7 @@ function Login() {
         const savedToken = localStorage.getItem("Token");
 
         const verifyResponse = await axios.post(
-          " https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/verifyToken",
+          "https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/verifyToken",
           {
             Token: savedToken,
           }
@@ -121,7 +121,7 @@ function Login() {
         Password,
       };
 
-      await axios.post(" https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/register", newUser);
+      await axios.post("https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/register", newUser);
       console.log("User saved:", newUser.FirstName);
       navigate("/home");
       toast.success("Sign in sucessful", {

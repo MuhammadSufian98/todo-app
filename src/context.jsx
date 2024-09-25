@@ -13,7 +13,7 @@ export const TODOProvider = ({ children }) => {
   const GetTask = async () => {
     try {
       const GetToken = localStorage.getItem("Token");
-      const res = await axios.get("http://localhost:5000/Tasks", {
+      const res = await axios.get("https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app//Tasks", {
         headers: {
           Authorization: `Bearer ${GetToken}`,
         },

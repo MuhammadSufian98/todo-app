@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(
   cors({
     origin:
-      "https://todo-3cxau5bpt-muhammad-sufians-projects-e54cc3c2.vercel.app",
+      "https://todo-npjko5z3s-muhammad-sufians-projects-e54cc3c2.vercel.app/",
     credentials: true,
   })
 );

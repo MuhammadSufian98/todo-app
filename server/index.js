@@ -13,6 +13,10 @@ mongoose
 
 app.use(express.json());
 app.use(cors());
+app.use(cors({
+  origin: 'https://todo-3cxau5bpt-muhammad-sufians-projects-e54cc3c2.vercel.app',
+  credentials: true,
+}));
 
 app.use("/", TasksRouter);
 app.use("/", LoginRouter);

@@ -28,7 +28,7 @@ function NavBar() {
   async function handleTaskSave() {
     const newTask = { Task, ID: fieldRN };
     try {
-      await axios.post("https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/tasks", newTask, {
+      await axios.post("http://localhost:5000/tasks", newTask, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("Token")}`,
         },

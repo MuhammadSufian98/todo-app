@@ -37,7 +37,7 @@ function MainPage() {
     try {
       const GetToken = localStorage.getItem("Token");
 
-      await axios.delete(`https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/Tasks/${taskId}`, {
+      await axios.delete(`http://localhost:5000/Tasks/${taskId}`, {
         headers: {
           Authorization: `Bearer ${GetToken}`,
         },
@@ -54,7 +54,7 @@ function MainPage() {
         const GetToken = localStorage.getItem("Token");
 
         await axios.patch(
-          `https://todo-app-bbjk-2ss4rw1a9-muhammad-sufians-projects-e54cc3c2.vercel.app/Tasks/${editTaskId}`,
+          `http://localhost:5000/Tasks/${editTaskId}`,
           {
             Task: editTaskValue,
           },

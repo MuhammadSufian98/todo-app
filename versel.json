@@ -8,7 +8,7 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "https://todo-app-zeta-sepia-89.vercel.app/",
       "dest": "server/index.js"
     }
   ]

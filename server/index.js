@@ -12,8 +12,10 @@ mongoose
   .catch((err) => console.error("Failed to connect to MongoDB", err));
 
 app.use(express.json());
-app.use(cors());
-
+app.use(cors({
+  origin: 'https://your-frontend-url.vercel.app', // Replace with your frontend URL
+  credentials: true,
+}));
 app.use("/", TasksRouter);
 app.use("/", LoginRouter);
 

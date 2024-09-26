@@ -9,7 +9,7 @@ const {
   updateTasks,
 } = require("../controllers/task.js");
 
-TasksRouter.get("/tasks", VerifyMiddleware, getTasks);
+TasksRouter.get("/tasks", getTasks);
 TasksRouter.post("/tasks", VerifyMiddleware, createTasks);
 TasksRouter.get("/tasks/:id", VerifyMiddleware, getTasksByID);
 TasksRouter.delete("/tasks/:id", VerifyMiddleware, deleteTasks);

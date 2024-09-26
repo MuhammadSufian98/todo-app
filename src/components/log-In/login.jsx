@@ -15,6 +15,8 @@ function Login() {
 
   const navigate = useNavigate();
 
+  const ApiUrl = import.meta.env.FRONTEND_ROUTES;
+
   useEffect(() => {
     const userToken = localStorage.getItem("Token");
     if (userToken) {
@@ -28,7 +30,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("https://todo-app-bbjk.vercel.app/login", {
+      const response = await axios.post(`${ApiUrl}/login`, {
         Email: LogInEmail,
         Password: LogInPassword,
       });
@@ -41,7 +43,7 @@ function Login() {
         const savedToken = localStorage.getItem("Token");
 
         const verifyResponse = await axios.post(
-          "https://todo-app-bbjk.vercel.app/verifyToken",
+          `${ApiUrl}/verifyToken`,
           {
             Token: savedToken,
           }
@@ -121,7 +123,7 @@ function Login() {
         Password,
       };
 
-      await axios.post("https://todo-app-bbjk.vercel.app/register", newUser);
+      await axios.post(`${ApiUrl}/register`, newUser);
       console.log("User saved:", newUser.FirstName);
       navigate("/home");
       toast.success("Sign in sucessful", {

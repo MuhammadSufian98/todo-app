@@ -7,9 +7,10 @@ import { TaskContext } from "../../context.jsx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
 function MainPage() {
   const navigate = useNavigate();
+
+  const ApiUrl = import.meta.env.FRONTEND_ROUTES;
 
   const {
     Tasks,
@@ -37,7 +38,7 @@ function MainPage() {
     try {
       const GetToken = localStorage.getItem("Token");
 
-      await axios.delete(`https://todo-app-bbjk.vercel.app//Tasks/${taskId}`, {
+      await axios.delete(`${ApiUrl}/Tasks/${taskId}`, {
         headers: {
           Authorization: `Bearer ${GetToken}`,
         },
@@ -54,7 +55,7 @@ function MainPage() {
         const GetToken = localStorage.getItem("Token");
 
         await axios.patch(
-          `https://todo-app-bbjk.vercel.app//Tasks/${editTaskId}`,
+          `${ApiUrl}/Tasks/${editTaskId}`,
           {
             Task: editTaskValue,
           },
@@ -175,7 +176,12 @@ function MainPage() {
               onChange={(e) => setFieldSB(e.target.value)}
               value={fieldSB}
             />
-            <button onClick={LogOut} className="BTNstyling">Log out</button>
+            <button
+              onClick={LogOut}
+              className="BTNstyling"
+            >
+              Log out
+            </button>
           </div>
         </div>
 

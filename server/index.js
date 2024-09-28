@@ -1,9 +1,11 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const TasksRouter = require("./routers/tasks.js");
-const LoginRouter = require("./routers/login.js");
+import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import TasksRouter from "./routers/tasks.js";
+import LoginRouter from "./routers/login.js";
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
 mongoose

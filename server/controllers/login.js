@@ -1,8 +1,8 @@
-const UserModel = require("../mongoDB/loginSchema.js");
-const bcrypt = require("bcrypt");
-const { generateToken, verifyToken } = require("../jwt.js");
+import UserModel from "../mongoDB/loginSchema.js";
+import bcrypt from "bcrypt";
+import { generateToken, verifyToken } from "../jwt.js";
 
-const userLogin = async (req, res) => {
+export const userLogin = async (req, res) => {
   const { Email, Password } = req.body;
 
   if (!Email || !Password) {
@@ -21,49 +21,61 @@ const userLogin = async (req, res) => {
     }
 
     const token = generateToken({ userId: user._id, email: user.email });
-
-    res.json({ user, token });
+    return res.json({ user, token });
   } catch (error) {
     console.error("Error logging in user:", error);
-    res.status(500).json({ error: "Failed to log in" });
+    return res.status(500).json({ error: "Failed to log in" });
   }
 };
 
-const verifyJwtToken = async (req, res) => {
+export const verifyJwtToken = async (req, res) => {
   const { Token } = req.body;
+  if (!Token) {
+    return res.status(400).json({ error: "Token is required" });
+  }
+
   try {
-    const isVerified = verifyToken(Token);
-    if (isVerified) {
-      res.json({ message: "Token is valid", verifyToken: true });
-    } else {
-      res.status(401).json({ message: "Token is invalid", verifyToken: false });
-    }
+    const decodedToken = verifyToken(Token);
+    return res.json({
+      message: "Token is valid",
+      verified: true,
+      decodedToken,
+    });
   } catch (err) {
-    res.status(500).json({ error: "Token verification failed" });
+    console.error("Token verification error:", err);
+    return res.status(401).json({ error: "Invalid token" });
   }
 };
 
-const registerNewUser = async (req, res) => {
+export const registerNewUser = async (req, res) => {
   const { FirstName, LastName, Email, Password } = req.body;
 
   if (!FirstName || !Email || !Password) {
-    return res.status(400).json({ error: "All fields are required" });
+    return res
+      .status(400)
+      .json({ error: "First name, email, and password are required" });
   }
 
   try {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(Password, salt);
-    const newUser = await UserModel.create({
-      FirstName,
-      LastName,
+    const existingUser = await UserModel.findOne({ email: Email });
+    if (existingUser) {
+      return res.status(409).json({ error: "User already exists" });
+    }
+
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(Password, saltRounds);
+
+    const newUser = new UserModel({
+      firstName: FirstName,
+      lastName: LastName,
       email: Email,
       password: hashedPassword,
     });
-    res.status(201).json(newUser);
+
+    await newUser.save();
+    return res.status(201).json(newUser);
   } catch (error) {
     console.error("Error creating user:", error);
-    res.status(500).json({ error: "Failed to create user" });
+    return res.status(500).json({ error: "Failed to create user" });
   }
 };
-
-module.exports = { userLogin, verifyJwtToken, registerNewUser };

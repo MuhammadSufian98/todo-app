@@ -1,13 +1,13 @@
-const express = require("express");
+import express from "express";
 const LoginRouter = express.Router();
-const {
+import {
   userLogin,
   verifyJwtToken,
   registerNewUser,
-} = require("../controllers/login.js");
+} from "../controllers/login.js";
 
 LoginRouter.post("/login", userLogin);
 LoginRouter.post("/verifyToken", verifyJwtToken);
 LoginRouter.post("/register", registerNewUser);
 
-module.exports = LoginRouter;
+export default LoginRouter;

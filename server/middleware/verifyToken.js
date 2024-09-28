@@ -1,8 +1,8 @@
-const { verifyToken } = require("../jwt.js");
+import { verifyToken } from "../jwt.js";
 
 const VerifyTokenMiddleware = (req, res, next) => {
   const token = req.headers["authorization"];
-  console.log(req)
+  console.log(req);
   if (token) {
     const bearerToken = token.split(" ")[1];
     try {
@@ -20,4 +20,4 @@ const VerifyTokenMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = VerifyTokenMiddleware;
+export default VerifyTokenMiddleware;

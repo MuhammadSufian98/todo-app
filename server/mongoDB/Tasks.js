@@ -1,10 +1,8 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
 
 const TasksSchema = new mongoose.Schema({
-    roll_no: Number,
-    Task: String
-})
+  roll_no: Number,
+  Task: String,
+});
 
-const TaskModel = mongoose.model("Tasks", TasksSchema)
-
-module.exports = TaskModel;
+export const TaskModel = mongoose.model("Tasks", TasksSchema);

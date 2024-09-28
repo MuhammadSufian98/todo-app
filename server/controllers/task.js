@@ -1,6 +1,6 @@
-const TaskModel = require("../mongoDB/tasks.js");
+import { TaskModel } from "../mongoDB/tasks.js";
 
-const getTasks = async (req, res) => {
+export const getTasks = async (req, res) => {
   try {
     const tasks = await TaskModel.find();
     res.json(tasks);
@@ -10,7 +10,7 @@ const getTasks = async (req, res) => {
   }
 };
 
-const getTasksByID = async (req, res) => {
+export const getTasksByID = async (req, res) => {
   try {
     const taskByRollNo = await TaskModel.findOne({
       roll_no: req.params.id,
@@ -27,7 +27,7 @@ const getTasksByID = async (req, res) => {
   }
 };
 
-const createTasks = async (req, res) => {
+export const createTasks = async (req, res) => {
   try {
     const NewTask = req.body.Task;
     const rollNo = req.body.ID;
@@ -50,7 +50,7 @@ const createTasks = async (req, res) => {
   }
 };
 
-const deleteTasks = async (req, res) => {
+export const deleteTasks = async (req, res) => {
   try {
     const deletedTask = await TaskModel.findByIdAndDelete(req.params.id);
 
@@ -65,7 +65,7 @@ const deleteTasks = async (req, res) => {
   }
 };
 
-const updateTasks = async (req, res) => {
+export const updateTasks = async (req, res) => {
   try {
     const updatedTask = await TaskModel.findByIdAndUpdate(
       req.params.id,
@@ -82,12 +82,4 @@ const updateTasks = async (req, res) => {
     console.error("Error updating task:", error);
     res.status(500).json({ error: "Failed to update task" });
   }
-};
-
-module.exports = {
-  getTasks,
-  getTasksByID,
-  createTasks,
-  deleteTasks,
-  updateTasks,
 };

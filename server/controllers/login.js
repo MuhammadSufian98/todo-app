@@ -36,11 +36,7 @@ export const verifyJwtToken = async (req, res) => {
 
   try {
     const decodedToken = verifyToken(Token);
-    return res.json({
-      message: "Token is valid",
-      verified: true,
-      decodedToken,
-    });
+    return res.json({ message: "Token is valid", verified: true, decodedToken });
   } catch (err) {
     console.error("Token verification error:", err);
     return res.status(401).json({ error: "Invalid token" });
@@ -51,9 +47,7 @@ export const registerNewUser = async (req, res) => {
   const { FirstName, LastName, Email, Password } = req.body;
 
   if (!FirstName || !Email || !Password) {
-    return res
-      .status(400)
-      .json({ error: "First name, email, and password are required" });
+    return res.status(400).json({ error: "First name, email, and password are required" });
   }
 
   try {
@@ -79,3 +73,4 @@ export const registerNewUser = async (req, res) => {
     return res.status(500).json({ error: "Failed to create user" });
   }
 };
+

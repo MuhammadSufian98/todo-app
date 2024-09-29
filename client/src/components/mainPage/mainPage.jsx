@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 function MainPage() {
   const navigate = useNavigate();
 
-  const ApiUrl = import.meta.env.FRONTEND_ROUTES;
+  const ApiUrl = import.meta.env.VITE_FRONTEND_ROUTES;
 
   const {
     Tasks,

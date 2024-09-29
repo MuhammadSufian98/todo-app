@@ -10,6 +10,8 @@ function NavBar() {
   const [fieldRN, setFieldRN] = useState("");
   const [currentDate, setCurrentDate] = useState("");
 
+  const ApiUrl = import.meta.env.VITE_FRONTEND_ROUTES;
+
   useEffect(() => {
     setCurrentDate(new Date().toDateString());
 
@@ -21,8 +23,6 @@ function NavBar() {
     } else {
       setFilteredTasks(Tasks);
     }
-
- 
   }, [SearchRN, Tasks, setFilteredTasks]);
 
   async function handleTaskSave() {

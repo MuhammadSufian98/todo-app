@@ -30,7 +30,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${ApiUrl}/login`, {
+      const response = await axios.post(`http://localhost:5000/login`, {
         Email: LogInEmail,
         Password: LogInPassword,
       });
@@ -43,7 +43,7 @@ function Login() {
         const savedToken = localStorage.getItem("Token");
 
         const verifyResponse = await axios.post(
-          `${ApiUrl}/verifyToken`,
+          `http://localhost:5000/verifyToken`,
           {
             Token: savedToken,
           }
@@ -123,7 +123,7 @@ function Login() {
         Password,
       };
 
-      await axios.post(`${ApiUrl}/register`, newUser);
+      await axios.post(`http://localhost:5000/register`, newUser);
       console.log("User saved:", newUser.FirstName);
       navigate("/home");
       toast.success("Sign in sucessful", {

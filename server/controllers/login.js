@@ -21,7 +21,7 @@ export const userLogin = async (req, res) => {
     }
 
     const token = generateToken({ userId: user._id, email: user.email });
-    return res.json({ user, token });
+    return res.json({ user: { email: user.email, firstName: user.firstName, lastName: user.lastName }, token });
   } catch (error) {
     console.error("Error logging in user:", error);
     return res.status(500).json({ error: "Failed to log in" });
@@ -36,7 +36,11 @@ export const verifyJwtToken = async (req, res) => {
 
   try {
     const decodedToken = verifyToken(Token);
-    return res.json({ message: "Token is valid", verified: true, decodedToken });
+    return res.json({
+      message: "Token is valid",
+      verified: true,
+      decodedToken,
+    });
   } catch (err) {
     console.error("Token verification error:", err);
     return res.status(401).json({ error: "Invalid token" });
@@ -44,10 +48,12 @@ export const verifyJwtToken = async (req, res) => {
 };
 
 export const registerNewUser = async (req, res) => {
-  const { FirstName, LastName, Email, Password } = req.body;
+  const { firstName, lastName, Email, Password } = req.body;
 
-  if (!FirstName || !Email || !Password) {
-    return res.status(400).json({ error: "First name, email, and password are required" });
+  if (!firstName || !Email || !Password) {
+    return res
+      .status(400)
+      .json({ error: "First name, email, and password are required" });
   }
 
   try {
@@ -60,14 +66,21 @@ export const registerNewUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(Password, saltRounds);
 
     const newUser = new UserModel({
-      firstName: FirstName,
-      lastName: LastName,
+      firstName: firstName,
+      lastName: lastName,
       email: Email,
       password: hashedPassword,
     });
 
+    console.log(newUser);
     await newUser.save();
-    return res.status(201).json(newUser);
+    
+    return res.status(201).json({
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      _id: newUser._id,
+    });
   } catch (error) {
     console.error("Error creating user:", error);
     return res.status(500).json({ error: "Failed to create user" });

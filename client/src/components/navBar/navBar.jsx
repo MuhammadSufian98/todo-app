@@ -5,12 +5,20 @@ import { TaskContext } from "../../context.jsx";
 import { toast } from "react-toastify";
 
 function NavBar() {
-  const { SearchRN, setFilteredTasks, Tasks, Task, setTask, GetTask } =
-    useContext(TaskContext);
+  const {
+    SearchRN,
+    setFilteredTasks,
+    Tasks,
+    Task,
+    setTask,
+    GetTask,
+    TaskImageSwitch,
+    setTaskImageSwitch,
+  } = useContext(TaskContext);
   const [fieldRN, setFieldRN] = useState("");
   const [currentDate, setCurrentDate] = useState("");
 
-  const ApiUrl = import.meta.env.VITE_FRONTEND_ROUTES;
+  const apiUrl = import.meta.env.VITE_FRONTEND_ROUTES;
 
   useEffect(() => {
     setCurrentDate(new Date().toDateString());
@@ -28,7 +36,7 @@ function NavBar() {
   async function handleTaskSave() {
     const newTask = { Task, ID: fieldRN };
     try {
-      await axios.post(`http://localhost:5000/tasks`, newTask, {
+      await axios.post(`${apiUrl}/tasks`, newTask, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("Token")}`,
         },
@@ -43,6 +51,14 @@ function NavBar() {
     }
   }
 
+  function handleSwitchToTasks() {
+    setTaskImageSwitch(false);
+  }
+
+  function handleSwitchToImage() {
+    setTaskImageSwitch(true);
+  }
+
   return (
     <div className="Test">
       <div className="MainBody">
@@ -55,8 +71,18 @@ function NavBar() {
           <h1>Muhammad Sufian</h1>
         </div>
         <div className="Divider"></div>
+        <div className="Image-Tasks-Switch">
+          <button className="SubmitBTN" onClick={handleSwitchToTasks}>
+            Tasks
+          </button>
+          <button className="SubmitBTN" onClick={handleSwitchToImage}>
+            Images
+          </button>
+        </div>
 
-        <div className="SearchBar-RollNoDiv">
+        <div
+          className={TaskImageSwitch ? "Display-none" : "SearchBar-RollNoDiv"}
+        >
           <input
             className="SearchBar"
             type="text"
@@ -71,10 +97,7 @@ function NavBar() {
             value={Task}
             placeholder="Add new task"
           />
-          <button
-            onClick={handleTaskSave}
-            className="SubmitBTN"
-          >
+          <button onClick={handleTaskSave} className="SubmitBTN">
             Submit
           </button>
         </div>

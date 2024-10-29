@@ -9,6 +9,7 @@ export const TODOProvider = ({ children }) => {
   const [FilterTask, setFilteredTasks] = useState([]);
   const [ChangeFilterTF, setChangeFilterTF] = useState(false);
   const [Task, setTask] = useState("");
+  const [TaskImageSwitch, setTaskImageSwitch] = useState(false);
 
   const GetTask = async () => {
     try {
@@ -24,8 +25,6 @@ export const TODOProvider = ({ children }) => {
     }
   };
 
-
-
   return (
     <TaskContext.Provider
       value={{
@@ -40,6 +39,8 @@ export const TODOProvider = ({ children }) => {
         Task,
         setTask,
         GetTask,
+        TaskImageSwitch,
+        setTaskImageSwitch,
       }}
     >
       {children}

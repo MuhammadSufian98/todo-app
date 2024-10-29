@@ -9,8 +9,7 @@ import { toast } from "react-toastify";
 
 function MainPage() {
   const navigate = useNavigate();
-
-  const ApiUrl = import.meta.env.VITE_FRONTEND_ROUTES;
+  const apiUrl = import.meta.env.VITE_FRONTEND_ROUTES;
 
   const {
     Tasks,
@@ -22,9 +21,11 @@ function MainPage() {
     Task,
     setTask,
   } = useContext(TaskContext);
+
   useEffect(() => {
     GetTask();
   }, []);
+
   const [fieldSB, setFieldSB] = useState("");
   const [editTaskId, setEditTaskId] = useState(null);
   const [editTaskValue, setEditTaskValue] = useState("");
@@ -38,7 +39,7 @@ function MainPage() {
     try {
       const GetToken = localStorage.getItem("Token");
 
-      await axios.delete(`http://localhost:5000/Tasks/${taskId}`, {
+      await axios.delete(`${apiUrl}/Tasks/${taskId}`, {
         headers: {
           Authorization: `Bearer ${GetToken}`,
         },
@@ -55,7 +56,7 @@ function MainPage() {
         const GetToken = localStorage.getItem("Token");
 
         await axios.patch(
-          `http://localhost:5000/Tasks/${editTaskId}`,
+          `${apiUrl}/Tasks/${editTaskId}`,
           {
             Task: editTaskValue,
           },
@@ -92,6 +93,7 @@ function MainPage() {
       setChangeFilterTF(false);
     }
   }
+
   function LogOut() {
     localStorage.removeItem("Token");
     navigate("/");
@@ -103,10 +105,7 @@ function MainPage() {
 
   const renderTasks = (tasks) => {
     return tasks.map((taskSaved, index) => (
-      <div
-        className={`TaskRender-BTN-Outter`}
-        key={index}
-      >
+      <div className={`TaskRender-BTN-Outter`} key={index}>
         <div className={`TaskRender-BTN`}>
           <div className="TaskRender">
             <p>{taskSaved.roll_no}</p>
@@ -128,10 +127,7 @@ function MainPage() {
                     onKeyDown={ToEditFunction}
                     placeholder="Edit task"
                   />
-                  <button
-                    onClick={Cancel}
-                    className="BTNstyling"
-                  >
+                  <button onClick={Cancel} className="BTNstyling">
                     Cancel
                   </button>
                 </div>
@@ -176,10 +172,7 @@ function MainPage() {
               onChange={(e) => setFieldSB(e.target.value)}
               value={fieldSB}
             />
-            <button
-              onClick={LogOut}
-              className="BTNstyling"
-            >
+            <button onClick={LogOut} className="BTNstyling">
               Log out
             </button>
           </div>

@@ -29,11 +29,13 @@ export const getTasksByID = async (req, res) => {
 
 export const createTasks = async (req, res) => {
   try {
-    const NewTask = req.body.Task;
-    const rollNo = req.body.ID;
+    const { Task: NewTask, ID: rollNo } = req.body;
+
+    if (!NewTask || !rollNo) {
+      return res.status(400).json({ error: "Task and roll number are required" });
+    }
 
     const existingTask = await TaskModel.findOne({ Task: NewTask });
-
     if (existingTask) {
       return res.status(400).json({ error: "Task already exists" });
     }
@@ -49,6 +51,7 @@ export const createTasks = async (req, res) => {
     res.status(500).json({ error: "Failed to save the task" });
   }
 };
+
 
 export const deleteTasks = async (req, res) => {
   try {

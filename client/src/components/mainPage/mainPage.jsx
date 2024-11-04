@@ -39,7 +39,7 @@ function MainPage() {
     try {
       const GetToken = localStorage.getItem("Token");
 
-      await axios.delete(`${apiUrl}/Tasks/${taskId}`, {
+      await axios.delete(`http://localhost:5000/tasks/${taskId}`, {
         headers: {
           Authorization: `Bearer ${GetToken}`,
         },
@@ -56,7 +56,7 @@ function MainPage() {
         const GetToken = localStorage.getItem("Token");
 
         await axios.patch(
-          `${apiUrl}/Tasks/${editTaskId}`,
+          `http://localhost:5000/tasks/${editTaskId}`,
           {
             Task: editTaskValue,
           },

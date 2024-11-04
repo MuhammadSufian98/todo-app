@@ -122,7 +122,7 @@ function Login() {
         Email,
         Password,
       };
-
+      console.log(newUser);
       await axios.post(`http://localhost:5000/auth/register`, newUser);
       console.log("User saved:", newUser.FirstName);
       navigate("/home");

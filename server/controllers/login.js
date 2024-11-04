@@ -60,8 +60,8 @@ export const registerNewUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(Password, saltRounds);
 
     const newUser = new UserModel({
-      firstName: FirstName,
-      lastName: LastName,
+      FirstName: FirstName,
+      LastName: LastName,
       email: Email,
       password: hashedPassword,
     });

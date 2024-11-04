@@ -28,7 +28,7 @@ function NavBar() {
   async function handleTaskSave() {
     const newTask = { Task, ID: fieldRN };
     try {
-      await axios.post(`${ApiUrl}/tasks`, newTask, {
+      await axios.post(`http://localhost:5000/tasks`, newTask, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("Token")}`,
         },

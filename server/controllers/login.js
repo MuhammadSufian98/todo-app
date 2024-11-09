@@ -48,9 +48,10 @@ export const verifyJwtToken = async (req, res) => {
 };
 
 export const registerNewUser = async (req, res) => {
-  const { firstName, lastName, Email, Password } = req.body;
+  const { FirstName, LastName, Email, Password } = req.body;
 
-  if (!firstName || !Email || !Password) {
+  console.log(FirstName);
+  if (!FirstName || !Email || !Password) {
     return res
       .status(400)
       .json({ error: "First name, email, and password are required" });
@@ -66,15 +67,15 @@ export const registerNewUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(Password, saltRounds);
 
     const newUser = new UserModel({
-      firstName: firstName,
-      lastName: lastName,
+      firstName: FirstName,
+      lastName: LastName,
       email: Email,
       password: hashedPassword,
     });
 
     console.log(newUser);
     await newUser.save();
-    
+
     return res.status(201).json({
       firstName: newUser.firstName,
       lastName: newUser.lastName,

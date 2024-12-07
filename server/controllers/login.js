@@ -2,6 +2,9 @@ import UserModel from "../mongoDB/loginSchema.js";
 import bcrypt from "bcrypt";
 import { generateToken, verifyToken } from "../jwt.js";
 
+export const running = async (req, res) => {
+  res.status(200).json("Server is sunning");
+};
 export const userLogin = async (req, res) => {
   const { Email, Password } = req.body;
 
@@ -21,7 +24,14 @@ export const userLogin = async (req, res) => {
     }
 
     const token = generateToken({ userId: user._id, email: user.email });
-    return res.json({ user: { email: user.email, firstName: user.firstName, lastName: user.lastName }, token });
+    return res.json({
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+      token,
+    });
   } catch (error) {
     console.error("Error logging in user:", error);
     return res.status(500).json({ error: "Failed to log in" });
@@ -87,4 +97,3 @@ export const registerNewUser = async (req, res) => {
     return res.status(500).json({ error: "Failed to create user" });
   }
 };
-

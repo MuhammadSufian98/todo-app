@@ -42,12 +42,9 @@ function Login() {
 
         const savedToken = localStorage.getItem("Token");
 
-        const verifyResponse = await axios.post(
-          `${ApiUrl}/auth/verifyToken`,
-          {
-            Token: savedToken,
-          }
-        );
+        const verifyResponse = await axios.post(`${ApiUrl}/auth/verifyToken`, {
+          Token: savedToken,
+        });
 
         const verifyToken = verifyResponse.data;
 
@@ -115,6 +112,14 @@ function Login() {
   }
 
   async function handleSignUp() {
+    if (!FirstName || !LastName || !Email || !Password) {
+      toast.error("All fields are required", {
+        className: "toast",
+        autoClose: 5000,
+      });
+      return;
+    }
+
     try {
       const newUser = {
         FirstName,
@@ -122,25 +127,34 @@ function Login() {
         Email,
         Password,
       };
-      console.log(newUser);
-      await axios.post(`${ApiUrl}/auth/register`, newUser);
-      console.log("User saved:", newUser.FirstName);
-      navigate("/home");
-      toast.success("Sign in sucessful", {
-        className: "toast",
-        autoClose: 5000,
-      });
-    } catch (err) {
-      toast.error("User already exists", {
-        className: "toast",
-        autoClose: 5000,
-      });
-    }
 
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
+      console.log("Attempting to sign up user:", newUser);
+      await axios.post(`${ApiUrl}/auth/register`, newUser);
+
+      console.log("User saved successfully:", newUser.FirstName);
+      toast.success("Sign-up successful", {
+        className: "toast",
+        autoClose: 5000,
+      });
+      navigate("/home");
+
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      if (err.response?.status === 409) {
+        toast.error("User already exists", {
+          className: "toast",
+          autoClose: 5000,
+        });
+      } else {
+        toast.error("An error occurred. Please try again.", {
+          className: "toast",
+          autoClose: 5000,
+        });
+      }
+    }
   }
 
   return (

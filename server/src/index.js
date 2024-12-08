@@ -22,9 +22,9 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", TasksRouter);
+app.use("/api", TasksRouter);
 app.use("/auth", LoginRouter);
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send('Server is running');
 });
 

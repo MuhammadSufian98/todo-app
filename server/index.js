@@ -24,6 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/", TasksRouter);
 app.use("/auth", LoginRouter);
+app.get('/', (req, res) => {
+  res.send('Server is tunning');
+});
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

@@ -1,14 +1,14 @@
 import dotenv from "dotenv";
-dotenv.config({path:"../.env"});
+dotenv.config({path:"./.env"});
 
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import TasksRouter from "../routers/tasks.js";
-import LoginRouter from "../routers/login.js";
-import ImageRouter from "../routers/ImageUpload.js";
+import TasksRouter from "./routers/tasks.js";
+import LoginRouter from "./routers/login.js";
+import ImageRouter from "./routers/ImageUpload.js";
 import multer from "multer";
-import ImageModel from "../mongoDB/ImageSchema.js"
+import ImageModel from "./mongoDB/ImageSchema.js"
 
 const app = express();
 const port = process.env.SERVER_PORT || 3000;

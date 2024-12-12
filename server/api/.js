@@ -1,5 +1,5 @@
-const BuiltTime = require('./built-time');
-module.exports = (request, response) => {
+import { BuiltTime } from "./built-time";
+export const Built = (request, response) => {
   response.setHeader('content-type', 'text/plain');
   response.send(`
     This Serverless Function was built at ${new Date(BuiltTime)}.

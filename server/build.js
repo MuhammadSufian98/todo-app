@@ -1,5 +1,19 @@
-const fs = require('fs');
-fs.writeFile('built-time.js', `module.exports = '${new Date()}'`, (err) => {
-  if (err) throw err;
-  console.log('Build time file created successfully!');
-});
+import { BuiltTime } from "./built-time";
+
+export const Built = (request, response) => {
+  response.setHeader('content-type', 'text/plain');
+  
+  const builtDate = new Date(BuiltTime);
+  if (isNaN(builtDate.getTime())) {
+    response.send(`
+      This Serverless Function was built at an unknown time.
+      The current time is ${new Date()}
+    `);
+    return;
+  }
+
+  response.send(`
+    This Serverless Function was built at ${builtDate}.
+    The current time is ${new Date()}
+  `);
+};

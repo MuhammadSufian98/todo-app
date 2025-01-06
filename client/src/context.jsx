@@ -14,7 +14,7 @@ export const TODOProvider = ({ children }) => {
   const GetTask = async () => {
     try {
       const GetToken = localStorage.getItem("Token");
-      const res = await axios.get("http://localhost:5000/tasks", {
+      const res = await axios.get("http://localhost:5000/api/tasks", {
         headers: {
           Authorization: `Bearer ${GetToken}`,
         },

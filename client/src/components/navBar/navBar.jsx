@@ -51,13 +51,7 @@ function NavBar() {
     }
   }
 
-  function handleSwitchToTasks() {
-    setTaskImageSwitch(false);
-  }
-
-  function handleSwitchToImage() {
-    setTaskImageSwitch(true);
-  }
+ 
 
   return (
     <div className="Test">
@@ -72,16 +66,19 @@ function NavBar() {
         </div>
         <div className="Divider"></div>
         <div className="Image-Tasks-Switch">
-          <button className="SubmitBTN" onClick={handleSwitchToTasks}>
+          <button className="SubmitBTN" onClick={() => setTaskImageSwitch("MainPage")}>
             Tasks
           </button>
-          <button className="SubmitBTN" onClick={handleSwitchToImage}>
+          <button className="SubmitBTN" onClick={()=>setTaskImageSwitch("ImageUpload")}>
             Images
+          </button>
+          <button className="SubmitBTN" onClick={() => setTaskImageSwitch("GreenAPI")}>
+            WhatsApp
           </button>
         </div>
 
         <div
-          className={TaskImageSwitch ? "Display-none" : "SearchBar-RollNoDiv"}
+          className={TaskImageSwitch!="MainPage" ? "Display-none" : "SearchBar-RollNoDiv"}
         >
           <input
             className="SearchBar"

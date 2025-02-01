@@ -9,7 +9,7 @@ export const TODOProvider = ({ children }) => {
   const [FilterTask, setFilteredTasks] = useState([]);
   const [ChangeFilterTF, setChangeFilterTF] = useState(false);
   const [Task, setTask] = useState("");
-  const [TaskImageSwitch, setTaskImageSwitch] = useState(false);
+  const [TaskImageSwitch, setTaskImageSwitch] = useState("MainPage");
 
   const GetTask = async () => {
     try {
@@ -24,6 +24,7 @@ export const TODOProvider = ({ children }) => {
       console.log("Error fetching tasks:", err);
     }
   };
+  
 
   return (
     <TaskContext.Provider

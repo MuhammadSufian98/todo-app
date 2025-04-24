@@ -11,12 +11,12 @@ function NavBarAndMP() {
     switch (TaskImageSwitch) {
       case "MainPage":
         return <MainPage />;
-      case "ImageUpload":
-        return <ImageUpload />;
-      case "GreenAPI":
-        return <GreenAPI />;
-      default:
-        return <MainPage />;
+      //   case "ImageUpload":
+      //     return <ImageUpload />;
+      //   case "GreenAPI":
+      //     return <GreenAPI />;
+      //   default:
+      //     return <MainPage />;
     }
   };
 

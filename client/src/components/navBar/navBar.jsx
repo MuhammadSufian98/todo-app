@@ -51,8 +51,6 @@ function NavBar() {
     }
   }
 
- 
-
   return (
     <div className="Test">
       <div className="MainBody">
@@ -66,19 +64,20 @@ function NavBar() {
         </div>
         <div className="Divider"></div>
         <div className="Image-Tasks-Switch">
-          <button className="SubmitBTN" onClick={() => setTaskImageSwitch("MainPage")}>
+          <button
+            className="SubmitBTN"
+            onClick={() => setTaskImageSwitch("MainPage")}
+          >
             Tasks
-          </button>
-          <button className="SubmitBTN" onClick={()=>setTaskImageSwitch("ImageUpload")}>
-            Images
-          </button>
-          <button className="SubmitBTN" onClick={() => setTaskImageSwitch("GreenAPI")}>
-            WhatsApp
           </button>
         </div>
 
         <div
-          className={TaskImageSwitch!="MainPage" ? "Display-none" : "SearchBar-RollNoDiv"}
+          className={
+            TaskImageSwitch != "MainPage"
+              ? "Display-none"
+              : "SearchBar-RollNoDiv"
+          }
         >
           <input
             className="SearchBar"
